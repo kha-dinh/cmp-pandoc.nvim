@@ -148,15 +148,16 @@ local citations = function(path, opts)
 end
 
 M.bibliography = function(bufnr, opts)
-  local bib_paths = M.get_bibliography_paths(bufnr)
-  
+  -- local bib_paths = M.get_bibliography_paths(bufnr)
+  local bib_paths = require("mkdnflow.bib").bib_paths.root
+  -- if vim.g["pandoc#biblio#bibs"] then
+  --   bib_paths = vim.g["pandoc#biblio#bibs"]
+  --   -- table.insert(bib_paths, vim.g["pandoc#biblio#bibs"])
+  -- end
+  -- print(vim.inspect(bib_paths))
   if not bib_paths then
-    if vim.g["pandoc#biblio#bibs"] then
-      bib_paths = vim.g["pandoc#biblio#bibs"]
-    end
-    if not bib_paths then
-      return
-    end
+    print("Cannot find bib_paths")
+    return
   end
 
   local all_bib_entrys = {}
